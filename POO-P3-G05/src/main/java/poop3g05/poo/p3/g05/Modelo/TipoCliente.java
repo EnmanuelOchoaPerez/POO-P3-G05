@@ -10,6 +10,6 @@ package poop3g05.poo.p3.g05.Modelo;
  */
 
 public enum TipoCliente {
-    PERSONA_NATURAL,
+    PERSONAL,
     EMPRESA
 }

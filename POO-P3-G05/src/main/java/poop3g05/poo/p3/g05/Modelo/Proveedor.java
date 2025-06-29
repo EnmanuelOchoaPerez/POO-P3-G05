@@ -9,22 +9,17 @@ package poop3g05.poo.p3.g05.Modelo;
  * @author Rafael Cosmo
  */
 
-public class Proveedor {
-    private int id;
-    private String nombre;
-    private String contacto;
+public class Proveedor extends Usuario{
 
-    public Proveedor(int id, String nombre, String contacto) {
-        this.id = id;
-        this.nombre = nombre;
-        this.contacto = contacto;
+    private String descripcion;
+
+    public Proveedor(String descripcion, String telefono, String username) {
+        super(telefono, username);
+        this.descripcion = descripcion;
     }
-
+    
     // Getters y Setters
-    public int getId() { return id; }
-    public void setId(int id) { this.id = id; }
-    public String getNombre() { return nombre; }
-    public void setNombre(String nombre) { this.nombre = nombre; }
-    public String getContacto() { return contacto; }
-    public void setContacto(String contacto) { this.contacto = contacto; }
+    
+    public String getContacto() { return telefono; }
+    public void setContacto(String contacto) { this.telefono = contacto; }
 }

@@ -14,6 +14,7 @@ poop3g05\poo\p3\g05\Modelo\Servicio.class
 poop3g05\poo\p3\g05\Modelo\Vehiculo.class
 poop3g05\poo\p3\g05\Modelo\Tecnico.class
 poop3g05\poo\p3\g05\Vista\Menu.class
+poop3g05\poo\p3\g05\Controlador\GestorProveedores.class
 poop3g05\poo\p3\g05\Controlador\SistemaPrincipal.class
 poop3g05\poo\p3\g05\Controlador\GestorOrdenes.class
 poop3g05\poo\p3\g05\Controlador\GestorFacturas.class

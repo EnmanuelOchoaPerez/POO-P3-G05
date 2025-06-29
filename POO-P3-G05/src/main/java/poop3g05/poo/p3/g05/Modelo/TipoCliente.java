@@ -6,8 +6,10 @@ package poop3g05.poo.p3.g05.Modelo;
 
 /**
  *
- * @author Enmanuel
+ * @author Rafael Cosmo
  */
+
 public enum TipoCliente {
-    EMPRESARIAL, PERSONAL
+    PERSONA_NATURAL,
+    EMPRESA
 }

@@ -3,27 +3,12 @@
  */
 
 package poop3g05.poo.p3.g05.Vista;
-
+import poop3g05.poo.p3.g05.Controlador.*;
+import poop3g05.poo.p3.g05.Modelo.*;
 /**
  *
  * @author Rafael Cosmo
  */
-
-
-import poop3g05.poo.p3.g05.Controlador.GestorClientes;
-import poop3g05.poo.p3.g05.Controlador.GestorFacturas;
-import poop3g05.poo.p3.g05.Controlador.GestorOrdenes;
-import poop3g05.poo.p3.g05.Controlador.GestorServicios;
-import poop3g05.poo.p3.g05.Controlador.GestorTecnicos;
-import poop3g05.poo.p3.g05.Modelo.Cliente;
-import poop3g05.poo.p3.g05.Modelo.DetalleServicio;
-import poop3g05.poo.p3.g05.Modelo.Factura;
-import poop3g05.poo.p3.g05.Modelo.Orden;
-import poop3g05.poo.p3.g05.Modelo.Servicio;
-import poop3g05.poo.p3.g05.Modelo.Tecnico;
-import poop3g05.poo.p3.g05.Modelo.TipoCliente;
-import poop3g05.poo.p3.g05.Modelo.Vehiculo;
-import poop3g05.poo.p3.g05.Modelo.TipoVehiculo;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -56,29 +41,14 @@ public class Menu {
             scanner.nextLine();  // Limpiar buffer
             
             switch (opcion) {
-                case 1:
-                    registrarCliente(gestorClientes);
-                    break;
-                case 2:
-                    crearOrdenServicio(gestorClientes, gestorServicios, gestorTecnicos, gestorOrdenes);
-                    break;
-                case 3:
-                    generarFactura(gestorFacturas, gestorClientes, gestorOrdenes);
-                    break;
-                case 4:
-                    listarClientes(gestorClientes);
-                    break;
-                case 5:
-                    listarServicios(gestorServicios);
-                    break;
-                case 6:
-                    listarTecnicos(gestorTecnicos);
-                    break;
-                case 7:
-                    System.out.println("Saliendo del sistema...");
-                    break;
-                default:
-                    System.out.println("Opción inválida");
+                case 1 -> registrarCliente(gestorClientes);
+                case 2 -> crearOrdenServicio(gestorClientes, gestorServicios, gestorTecnicos, gestorOrdenes);
+                case 3 -> generarFactura(gestorFacturas, gestorClientes, gestorOrdenes);
+                case 4 -> listarClientes(gestorClientes);
+                case 5 -> listarServicios(gestorServicios);
+                case 6 -> listarTecnicos(gestorTecnicos);
+                case 7 -> System.out.println("Saliendo del sistema...");
+                default -> System.out.println("Opción inválida");
             }
         } while (opcion != 7);
     }
@@ -87,6 +57,8 @@ public class Menu {
         System.out.println("\n--- REGISTRAR CLIENTE ---");
         System.out.print("Nombre: ");
         String nombre = scanner.nextLine();
+        System.out.print("Numero de telefono: ");
+        String telefono = scanner.nextLine();
         
         System.out.println("Tipo de cliente:");
         System.out.println("1. Persona Natural");
@@ -95,9 +67,9 @@ public class Menu {
         int tipo = scanner.nextInt();
         scanner.nextLine();
         
-        TipoCliente tipoCliente = (tipo == 1) ? TipoCliente.PERSONA_NATURAL : TipoCliente.EMPRESA;
+        TipoCliente tipoCliente = (tipo == 1) ? TipoCliente.PERSONAL : TipoCliente.EMPRESA;
         
-        Cliente cliente = new Cliente(0, nombre, tipoCliente);
+        Cliente cliente = new Cliente( nombre, telefono, tipoCliente);
         gestorClientes.agregarCliente(cliente);
         System.out.println("Cliente registrado exitosamente!");
     }
@@ -127,12 +99,6 @@ public class Menu {
         System.out.println("\nDatos del vehículo:");
         System.out.print("Placa: ");
         String placa = scanner.nextLine();
-        System.out.print("Marca: ");
-        String marca = scanner.nextLine();
-        System.out.print("Modelo: ");
-        String modelo = scanner.nextLine();
-        System.out.print("Año: ");
-        int año = scanner.nextInt();
         scanner.nextLine();
         
         System.out.println("Tipo de vehículo:");
@@ -145,12 +111,12 @@ public class Menu {
         
         TipoVehiculo tipo = TipoVehiculo.AUTO;
         switch (tipoVehiculo) {
-            case 1: tipo = TipoVehiculo.AUTO; break;
-            case 2: tipo = TipoVehiculo.CAMIONETA; break;
-            case 3: tipo = TipoVehiculo.MOTOCICLETA; break;
+            case 1 -> tipo = TipoVehiculo.AUTO;
+            case 2 -> tipo = TipoVehiculo.CAMIONETA;
+            case 3 -> tipo = TipoVehiculo.MOTOCICLETA;
         }
         
-        Vehiculo vehiculo = new Vehiculo(placa, marca, modelo, año, tipo);
+        Vehiculo vehiculo = new Vehiculo(placa, tipo);
         
         // Seleccionar servicios
         List<DetalleServicio> detalles = new ArrayList<>();
@@ -258,7 +224,7 @@ public class Menu {
         System.out.println("\n--- FACTURA GENERADA ---");
         System.out.println("Número: " + factura.getId());
         System.out.println("Fecha: " + factura.getFecha());
-        System.out.println("Cliente: " + factura.getCliente().getNombre());
+        System.out.println("Cliente: " + factura.getCliente().getUsername());
         System.out.println("\nDetalles:");
         for (DetalleServicio detalle : factura.getDetalles()) {
             System.out.println(detalle.getServicio().getNombre() + 
@@ -271,7 +237,7 @@ public class Menu {
     private static void listarClientes(GestorClientes gestorClientes) {
         System.out.println("\n--- LISTA DE CLIENTES ---");
         for (Cliente cliente : gestorClientes.getClientes()) {
-            System.out.println(cliente.getId() + " - " + cliente.getNombre() + 
+            System.out.println(cliente.getId() + " - " + cliente.getUsername() + 
                 " (" + cliente.getTipoCliente() + ")");
         }
     }
@@ -287,7 +253,7 @@ public class Menu {
     private static void listarTecnicos(GestorTecnicos gestorTecnicos) {
         System.out.println("\n--- LISTA DE TÉCNICOS ---");
         for (Tecnico tecnico : gestorTecnicos.getTecnicos()) {
-            System.out.println(tecnico.getId() + " - " + tecnico.getNombre() + 
+            System.out.println(tecnico.getId() + " - " + tecnico.getUsername() + 
                 " - " + tecnico.getEspecialidad());
         }
     }

@@ -8,27 +8,41 @@ package poop3g05.poo.p3.g05.Modelo;
  *
  * @author Rafael Cosmo
  */
+public abstract class Usuario {
+    private static int contadorId = 1;
+    protected int id;
+    protected String telefono;
+    protected String username;
 
-public class Usuario {
-    private int id;
-    private String username;
-    private String password;
-    private String rol;
-
-    public Usuario(int id, String username, String password, String rol) {
-        this.id = id;
+    public Usuario(String telefono, String username) {
+        this.id = contadorId++;
+        this.telefono = telefono;
         this.username = username;
-        this.password = password;
-        this.rol = rol;
     }
 
     // Getters y Setters
-    public int getId() { return id; }
-    public void setId(int id) { this.id = id; }
-    public String getUsername() { return username; }
-    public void setUsername(String username) { this.username = username; }
-    public String getPassword() { return password; }
-    public void setPassword(String password) { this.password = password; }
-    public String getRol() { return rol; }
-    public void setRol(String rol) { this.rol = rol; }
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
 }

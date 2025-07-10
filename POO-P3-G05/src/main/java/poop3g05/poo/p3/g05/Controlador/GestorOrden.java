@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class GestorOrdenes {
+public class GestorOrden {
     private List<Orden> ordenes = new ArrayList<>();
     private int nextId = 1;
 

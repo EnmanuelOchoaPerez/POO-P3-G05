@@ -8,30 +8,16 @@ package poop3g05.poo.p3.g05.Controlador;
  *
  * @author Rafael Cosmo
  */
-
 import poop3g05.poo.p3.g05.Modelo.Tecnico;
-import java.util.ArrayList;
-import java.util.List;
 
-public class GestorTecnico {
-    private List<Tecnico> tecnicos = new ArrayList<>();
-    private int nextId = 1;
+public class GestorTecnico extends GestorUsuario<Tecnico> {
 
-    public void agregarTecnico(Tecnico tecnico) {
-        tecnico.setId(nextId++);
-        tecnicos.add(tecnico);
+    public void editarEspecialidadTecnico(String id, String especialidad) {
+        ((Tecnico) usuarios.get(usuarios.indexOf(buscarUsuario(id)))).setEspecialidad(especialidad);
     }
 
-    public Tecnico buscarTecnico(int id) {
-        for (Tecnico tecnico : tecnicos) {
-            if (tecnico.getId() == id) {
-                return tecnico;
-            }
-        }
-        return null;
+    public void eliminarTecnico(String id) {
+        usuarios.remove(buscarUsuario(id));
     }
 
-    public List<Tecnico> getTecnicos() {
-        return new ArrayList<>(tecnicos);
-    }
 }

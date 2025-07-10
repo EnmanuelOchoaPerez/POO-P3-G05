@@ -13,7 +13,7 @@ import poop3g05.poo.p3.g05.Modelo.Cliente;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GestorClientes {
+public class GestorCliente {
     private List<Cliente> clientes = new ArrayList<>();
     private int nextId = 1;
 

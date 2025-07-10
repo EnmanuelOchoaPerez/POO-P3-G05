@@ -13,7 +13,7 @@ import poop3g05.poo.p3.g05.Modelo.Tecnico;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GestorTecnicos {
+public class GestorTecnico {
     private List<Tecnico> tecnicos = new ArrayList<>();
     private int nextId = 1;
 

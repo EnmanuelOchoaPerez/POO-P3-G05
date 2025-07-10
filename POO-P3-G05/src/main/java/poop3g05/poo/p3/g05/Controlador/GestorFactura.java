@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class GestorFacturas {
+public class GestorFactura {
     private List<Factura> facturas = new ArrayList<>();
     private int nextId = 1;
 

@@ -9,22 +9,15 @@ package poop3g05.poo.p3.g05.Controlador;
  * @author Rafael Cosmo
  */
 
-import poop3g05.poo.p3.g05.Modelo.Cliente;
-import poop3g05.poo.p3.g05.Modelo.DetalleServicio;
-import poop3g05.poo.p3.g05.Modelo.Orden;
-import poop3g05.poo.p3.g05.Modelo.Servicio;
-import poop3g05.poo.p3.g05.Modelo.Tecnico;
-import poop3g05.poo.p3.g05.Modelo.Vehiculo;
+import poop3g05.poo.p3.g05.Modelo.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class GestorOrden {
     private List<Orden> ordenes = new ArrayList<>();
-    private int nextId = 1;
 
     public void crearOrden(Orden orden) {
-        orden.setId(nextId++);
         ordenes.add(orden);
     }
 

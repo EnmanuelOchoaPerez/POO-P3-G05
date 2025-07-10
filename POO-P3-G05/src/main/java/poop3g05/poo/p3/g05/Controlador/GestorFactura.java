@@ -13,13 +13,16 @@ import poop3g05.poo.p3.g05.Modelo.DetalleServicio;
 import poop3g05.poo.p3.g05.Modelo.Factura;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 public class GestorFactura {
-    private List<Factura> facturas = new ArrayList<>();
+    private final ArrayList<Factura> facturas;
     private int nextId = 1;
 
-    public Factura generarFactura(Cliente cliente, List<DetalleServicio> detalles) {
+    public GestorFactura() {
+        this.facturas = new ArrayList<>();
+    }
+
+    public Factura generarFactura(Cliente cliente, ArrayList<DetalleServicio> detalles) {
         Factura factura = new Factura(nextId++, new Date(), cliente, detalles);
         facturas.add(factura);
         return factura;
@@ -34,7 +37,7 @@ public class GestorFactura {
         return null;
     }
 
-    public List<Factura> getFacturas() {
+    public ArrayList<Factura> getFacturas() {
         return new ArrayList<>(facturas);
     }
 }

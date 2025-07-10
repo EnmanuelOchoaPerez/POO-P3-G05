@@ -12,33 +12,25 @@ import java.util.List;
 
 public class Servicio {
 
-    private static int contadorId = 1; // contador estático que se incrementa
-    private int id;
+    private static int contadorId = 1;
+    private int codigo;
     private String nombre;
     private double precio;
     private List<Insumo> insumos;
 
     public Servicio(String nombre, double precio) {
-        this.id = contadorId++;
+        this.codigo = contadorId++;
         this.nombre = nombre;
         this.precio = precio;
     }
 
     // Getters y Setters
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+    public int getCodigo() {
+        return codigo;
     }
 
     public String getNombre() {
         return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
     }
 
     public double getPrecio() {
@@ -53,12 +45,13 @@ public class Servicio {
         return insumos;
     }
 
-    public void setInsumos(List<Insumo> insumos) {
-        this.insumos = insumos;
-    }
-
     @Override
     public String toString() {
-        return nombre + " - $" + precio;
+        StringBuilder sb = new StringBuilder();
+        sb.append("Servicio : ");
+        sb.append("").append(codigo);
+        sb.append(", ").append(nombre);
+        sb.append(", $").append(precio);
+        return sb.toString();
     }
 }

@@ -13,8 +13,8 @@ public class Tecnico extends Usuario{
 
     private String especialidad;
 
-    public Tecnico(String telefono, String nombre, String especialidad) {
-        super(telefono, nombre);
+    public Tecnico(String id, String telefono, String nombre, String especialidad) {
+        super(id, telefono, nombre);
         this.especialidad = especialidad;
     }
 
@@ -25,6 +25,10 @@ public class Tecnico extends Usuario{
     
     @Override
     public String toString() {
-        return username + " - " + especialidad;
+        StringBuilder sb = new StringBuilder();
+        sb.append("Tecnico : ");
+        sb.append(super.toString());
+        sb.append(", ").append(especialidad);
+        return sb.toString();
     }
 }

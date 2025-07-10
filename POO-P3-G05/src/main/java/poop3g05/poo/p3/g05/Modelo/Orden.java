@@ -9,20 +9,20 @@ package poop3g05.poo.p3.g05.Modelo;
  * @author Rafael Cosmo
  */
 
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 public class Orden {
     private int id;
     private Date fecha;
     private Cliente cliente;
     private Vehiculo vehiculo;
-    private List<DetalleServicio> servicios;
+    private ArrayList<DetalleServicio> servicios;
     private Tecnico tecnico;
     private String estado;
 
     public Orden(int id, Date fecha, Cliente cliente, Vehiculo vehiculo, 
-                List<DetalleServicio> servicios, Tecnico tecnico) {
+                ArrayList<DetalleServicio> servicios, Tecnico tecnico) {
         this.id = id;
         this.fecha = fecha;
         this.cliente = cliente;
@@ -41,8 +41,8 @@ public class Orden {
     public void setCliente(Cliente cliente) { this.cliente = cliente; }
     public Vehiculo getVehiculo() { return vehiculo; }
     public void setVehiculo(Vehiculo vehiculo) { this.vehiculo = vehiculo; }
-    public List<DetalleServicio> getServicios() { return servicios; }
-    public void setServicios(List<DetalleServicio> servicios) { this.servicios = servicios; }
+    public ArrayList<DetalleServicio> getServicios() { return servicios; }
+    public void setServicios(ArrayList<DetalleServicio> servicios) { this.servicios = servicios; }
     public Tecnico getTecnico() { return tecnico; }
     public void setTecnico(Tecnico tecnico) { this.tecnico = tecnico; }
     public String getEstado() { return estado; }

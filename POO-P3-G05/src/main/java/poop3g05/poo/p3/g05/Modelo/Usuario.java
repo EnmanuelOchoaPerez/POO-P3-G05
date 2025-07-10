@@ -9,24 +9,20 @@ package poop3g05.poo.p3.g05.Modelo;
  * @author Rafael Cosmo
  */
 public abstract class Usuario {
-    private static int contadorId = 1;
-    protected int id;
+    protected String id;
     protected String telefono;
     protected String username;
 
-    public Usuario(String telefono, String username) {
-        this.id = contadorId++;
+    public Usuario(String id,String telefono, String username) {
+        this.id = id;
         this.telefono = telefono;
         this.username = username;
     }
+    
 
     // Getters y Setters
-    public int getId() {
+    public String getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getUsername() {
@@ -43,6 +39,15 @@ public abstract class Usuario {
 
     public void setTelefono(String telefono) {
         this.telefono = telefono;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(id);
+        sb.append(", ").append(username);
+        sb.append(", ").append(telefono);
+        return sb.toString();
     }
 
 }

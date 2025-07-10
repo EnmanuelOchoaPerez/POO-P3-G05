@@ -11,27 +11,28 @@ package poop3g05.poo.p3.g05.Controlador;
 
 import poop3g05.poo.p3.g05.Modelo.Servicio;
 import java.util.ArrayList;
-import java.util.List;
 
 public class GestorServicio {
-    private List<Servicio> servicios = new ArrayList<>();
-    private int nextId = 1;
+    private final ArrayList<Servicio> servicios;
+
+    public GestorServicio() {
+        this.servicios = new ArrayList<>();
+    }
 
     public void agregarServicio(Servicio servicio) {
-        servicio.setId(nextId++);
         servicios.add(servicio);
     }
 
     public Servicio buscarServicio(int id) {
-        for (Servicio servicio : servicios) {
-            if (servicio.getId() == id) {
-                return servicio;
-            }
-        }
-        return null;
+        return servicios.get(id - 1);
     }
 
-    public List<Servicio> getServicios() {
+    public ArrayList<Servicio> getServicios() {
         return new ArrayList<>(servicios);
+    }
+    
+    
+    public void editarPrecioServicio(int id, double nuevoPrecio) {
+                buscarServicio(id).setPrecio(nuevoPrecio);
     }
 }

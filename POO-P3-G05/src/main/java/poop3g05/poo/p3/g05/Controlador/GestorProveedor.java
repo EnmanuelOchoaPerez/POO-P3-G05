@@ -8,6 +8,6 @@ package poop3g05.poo.p3.g05.Controlador;
  *
  * @author Enmanuel
  */
-public class GestorProveedores {
+public class GestorProveedor {
     
 }

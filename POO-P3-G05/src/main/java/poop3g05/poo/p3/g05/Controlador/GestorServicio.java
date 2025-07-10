@@ -13,7 +13,7 @@ import poop3g05.poo.p3.g05.Modelo.Servicio;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GestorServicios {
+public class GestorServicio {
     private List<Servicio> servicios = new ArrayList<>();
     private int nextId = 1;
 

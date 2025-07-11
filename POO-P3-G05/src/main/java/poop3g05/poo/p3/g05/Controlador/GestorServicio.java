@@ -24,7 +24,12 @@ public class GestorServicio {
     }
 
     public Servicio buscarServicio(int id) {
-        return servicios.get(id - 1);
+        for (Servicio servicio : servicios) {
+            if (servicio.getCodigo()== id) {
+                return servicio;
+            }
+        }
+        return null;
     }
 
     public ArrayList<Servicio> getServicios() {

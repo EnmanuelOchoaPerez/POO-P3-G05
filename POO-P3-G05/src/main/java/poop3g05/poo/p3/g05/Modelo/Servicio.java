@@ -8,7 +8,6 @@ package poop3g05.poo.p3.g05.Modelo;
  *
  * @author Rafael Cosmo
  */
-import java.util.List;
 
 public class Servicio {
 
@@ -16,7 +15,6 @@ public class Servicio {
     private int codigo;
     private String nombre;
     private double precio;
-    private List<Insumo> insumos;
 
     public Servicio(String nombre, double precio) {
         this.codigo = contadorId++;
@@ -41,14 +39,10 @@ public class Servicio {
         this.precio = precio;
     }
 
-    public List<Insumo> getInsumos() {
-        return insumos;
-    }
-
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Servicio : ");
+        sb.append("Codigo de servicio : ");
         sb.append("").append(codigo);
         sb.append(", ").append(nombre);
         sb.append(", $").append(precio);

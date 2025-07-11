@@ -60,6 +60,8 @@ public class SistemaPrincipal {
         gt.agregarUsuario(new Tecnico("0458926173", "0967812049", "Carlos López", "Mecánico general"));
         gt.agregarUsuario(new Tecnico("0367819402", "0924031687", "Andrea Ramírez", "Especialista en suspensión"));
 
+
+        // Agregar proveedores
         gp.agregarUsuario(new Proveedor("0741067125001", "0954728136","Filtros y Accesorios", "AutoFrenos Quito"));
         gp.agregarUsuario(new Proveedor("0824992816001", "0973461820","Distribuidora Eléctrica", "TecnoVolt Guayaquil"));
     }

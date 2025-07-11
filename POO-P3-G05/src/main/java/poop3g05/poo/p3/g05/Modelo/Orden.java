@@ -8,43 +8,62 @@ package poop3g05.poo.p3.g05.Modelo;
  *
  * @author Rafael Cosmo
  */
-
 import java.util.ArrayList;
 import java.util.Date;
 
 public class Orden {
-    private int id;
-    private Date fecha;
-    private Cliente cliente;
+
+    private String idCliente;
+    private Date fechaServicio;
     private Vehiculo vehiculo;
     private ArrayList<DetalleServicio> servicios;
-    private Tecnico tecnico;
-    private String estado;
+    private double total;
 
-    public Orden(int id, Date fecha, Cliente cliente, Vehiculo vehiculo, 
-                ArrayList<DetalleServicio> servicios, Tecnico tecnico) {
-        this.id = id;
-        this.fecha = fecha;
-        this.cliente = cliente;
+    public Orden(String id, Date fecha, Vehiculo vehiculo, ArrayList<DetalleServicio> servicios) {
+        this.idCliente = id;
+        this.fechaServicio = fecha;
         this.vehiculo = vehiculo;
         this.servicios = servicios;
-        this.tecnico = tecnico;
-        this.estado = "Pendiente";
+        this.total = this.calcularTotal();
+    }
+    
+    private double calcularTotal() {
+        double total = 0;
+        for (DetalleServicio s : servicios) {
+            total += s.calcularSubtotal();
+        }
+        return total;
+    }
+    // Getters y Setters
+    public String getIdCliente() {
+        return idCliente;
     }
 
-    // Getters y Setters
-    public int getId() { return id; }
-    public void setId(int id) { this.id = id; }
-    public Date getFecha() { return fecha; }
-    public void setFecha(Date fecha) { this.fecha = fecha; }
-    public Cliente getCliente() { return cliente; }
-    public void setCliente(Cliente cliente) { this.cliente = cliente; }
-    public Vehiculo getVehiculo() { return vehiculo; }
-    public void setVehiculo(Vehiculo vehiculo) { this.vehiculo = vehiculo; }
-    public ArrayList<DetalleServicio> getServicios() { return servicios; }
-    public void setServicios(ArrayList<DetalleServicio> servicios) { this.servicios = servicios; }
-    public Tecnico getTecnico() { return tecnico; }
-    public void setTecnico(Tecnico tecnico) { this.tecnico = tecnico; }
-    public String getEstado() { return estado; }
-    public void setEstado(String estado) { this.estado = estado; }
+    public double getTotal() {
+        return total;
+    }
+    
+    public Date getFechaServicio() {
+        return fechaServicio;
+    }
+
+    public Vehiculo getVehiculo() {
+        return vehiculo;
+    }
+
+    public ArrayList<DetalleServicio> getServicios() {
+        return servicios;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Fecha :");
+        sb.append("").append(fechaServicio);
+        sb.append("; ").append(vehiculo);
+        sb.append("; ").append(servicios);
+        sb.append("\nTotal = ").append(total);
+        return sb.toString();
+    }
+    
 }

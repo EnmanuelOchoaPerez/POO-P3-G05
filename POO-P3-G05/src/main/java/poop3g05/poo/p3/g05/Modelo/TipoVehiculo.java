@@ -5,6 +5,8 @@
 package poop3g05.poo.p3.g05.Modelo;
 
 /**
+ * Esta clase tipo enumeracion representa cuales tipos de vehiculos pueden ser
+ * atendidos.
  *
  * @author Rafael Cosmo
  */

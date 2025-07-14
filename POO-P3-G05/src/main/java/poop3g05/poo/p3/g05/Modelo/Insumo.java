@@ -5,30 +5,56 @@
 package poop3g05.poo.p3.g05.Modelo;
 
 /**
+ * Esta clase representa los insumos disponibles en el taller. Cada insumo tiene
+ * una descripción, un proveedor asociado y una cantidad en stock.
  *
  * @author Rafael Cosmo
  */
-
 public class Insumo {
-    private int id;
-    private String nombre;
-    private double precio;
-    private int stock;
 
-    public Insumo(int id, String nombre, double precio, int stock) {
-        this.id = id;
-        this.nombre = nombre;
-        this.precio = precio;
-        this.stock = stock;
+    /**
+     * El proveedor que suministra este insumo.
+     */
+    private Proveedor proveedor;
+
+    /**
+     * Descripción del insumo (por ejemplo: "Aceite 10W-30").
+     */
+    private String descripcion;
+
+    /**
+     * Cantidad disponible del insumo en inventario.
+     */
+    private int cantidad;
+
+    /**
+     * Constructor básico que recibe la descripción y el proveedor del insumo.
+     * La cantidad inicial se establece en 0.
+     *
+     * @param descripcion descripción del insumo
+     * @param proveedor proveedor asociado al insumo
+     */
+    public Insumo(String descripcion, Proveedor proveedor) {
+        this.descripcion = descripcion;
+        this.cantidad = 0;
     }
 
-    // Getters y Setters
-    public int getId() { return id; }
-    public void setId(int id) { this.id = id; }
-    public String getNombre() { return nombre; }
-    public void setNombre(String nombre) { this.nombre = nombre; }
-    public double getPrecio() { return precio; }
-    public void setPrecio(double precio) { this.precio = precio; }
-    public int getStock() { return stock; }
-    public void setStock(int stock) { this.stock = stock; }
+    /**
+     * Getters y Setters necesarios para la clase en el sistema.
+     */
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
+    }
 }

@@ -5,19 +5,37 @@
 package poop3g05.poo.p3.g05.Modelo;
 
 /**
+ * Esta clase hija de Persona representa a los proveedores del taller. Guarda
+ * información de contacto y una descripción de los productos o servicios que
+ * ofrecen.
  *
  * @author Rafael Cosmo
  */
-public class Proveedor extends Usuario {
+public class Proveedor extends Persona {
 
+    /**
+     * Este atributo representa una breve descripción del proveedor, como el
+     * tipo de suministros o servicios que ofrece.
+     */
     private String descripcion;
 
+    /**
+     * Constructor que recibe todos los datos necesarios para crear un
+     * proveedor, incluyendo los heredados y su descripción específica.
+     *
+     * @param id el identificador único del proveedor
+     * @param contacto el número de contacto del proveedor
+     * @param username el nombre del proveedor
+     * @param descripcion descripción del proveedor o sus servicios
+     */
     public Proveedor(String id, String contacto, String username, String descripcion) {
         super(id, contacto, username);
         this.descripcion = descripcion;
     }
 
-    // Getters y Setters
+    /**
+     * Getters y Setters necesarios para la clase en el sistema.
+     */
     public String getContacto() {
         return super.getTelefono();
     }
@@ -34,6 +52,12 @@ public class Proveedor extends Usuario {
         return descripcion;
     }
 
+    /**
+     * Este método sobreescribe el método toString de la clase padre para
+     * incluir también la descripción del proveedor.
+     *
+     * @return representación en texto del proveedor
+     */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

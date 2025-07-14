@@ -4,9 +4,9 @@
 package poop3g05.poo.p3.g05.Vista;
 
 import poop3g05.poo.p3.g05.Controlador.*;
-import poop3g05.poo.p3.g05.Modelo.*;
 /**
- *
+ * Esta clase es la encargada de mostrar el menu principal que deriva en todos
+ * los demas submenus y opciones de la aplicacion.
  * @author Rafael Cosmo
  */
 
@@ -14,20 +14,33 @@ import java.util.Scanner;
 
 public class Menu {
 
+    /**
+     * Objeto scanner que va a usar para recibir las entradas del usuario en
+     * toda la clase.
+     */
     private static final Scanner scanner = new Scanner(System.in);
 
+    /**
+     * Este metodo es el encargado de mostrar el menu principal que deriva en
+     * todos los demas submenus y opciones de la aplicacion.
+     * @param gestorCliente
+     * @param gestorServicio
+     * @param gestorTecnico
+     * @param gestorOrdenes
+     * @param gestorFactura
+     * @param gestorProveedor
+     * @param gestorInsumo
+     */
     public static void mostrarMenuPrincipal(
             GestorCliente gestorCliente,
             GestorServicio gestorServicio,
             GestorTecnico gestorTecnico,
-            GestorOrden gestorOrdene,
+            GestorOrden gestorOrdenes,
             GestorFactura gestorFactura,
-            GestorProveedor gestorProveedor) {
+            GestorProveedor gestorProveedor,
+            GestorInsumo gestorInsumo) {
 
         String opcion;
-
-        String mensaje = "Funcion no implementada aun. Intente nuevamente.\n";
-
         StringBuilder menu = new StringBuilder("#    MENU PRINCIPAL    #\n=========================\n");
         String[] opciones = {
             "Admini1strar clientes",
@@ -47,7 +60,6 @@ public class Menu {
         boolean continuar = true;
 
         do {
-
             System.out.print(menu);
             System.out.print("Seleccione una opción: ");
             opcion = scanner.nextLine();
@@ -62,22 +74,21 @@ public class Menu {
                 case "4" ->
                     AdministrarServicio.subMenuServicio(gestorServicio);
                 case "5" ->
-                   AdministrarOrden.crearOrdenServicio(gestorCliente, gestorServicio, gestorTecnico, gestorOrdene);
+                    AdministrarOrden.crearOrdenServicio(gestorCliente, gestorServicio, gestorTecnico, gestorOrdenes);
                 case "6" ->
-                    System.out.println(mensaje);
+                    AdministrarInsumo.registrarInsumoFaltante(gestorInsumo, gestorTecnico, gestorProveedor);
                 case "7" ->
-                    System.out.println(mensaje);
-//                  generarFactura(gestorFactura, gestorCliente, gestorOrdene);
+                    AdministrarFactura.imprimirFactura(AdministrarFactura.registrarFactura(gestorFactura, gestorCliente, gestorOrdenes));
                 case "8" ->
-                    System.out.println(mensaje);
+                    AdministrarServicio.obtenerRecaudoServicios(gestorServicio);
                 case "9" ->
-                    System.out.println(mensaje);
+                    AdministrarTecnico.obtenerGananciaTecnicos(gestorTecnico);
                 case "0" -> {
                     continuar = false;
                     System.out.println("Saliendo de la aplicacion...");
                 }
                 default ->
-                    System.out.println("Opción no válida. Intente nuevamente.");
+                    System.out.println("Opción no válida. Intente nuevamente.\n");
             }
         } while (continuar);
     }

@@ -7,19 +7,32 @@ package poop3g05.poo.p3.g05.Vista;
 import java.util.Scanner;
 import poop3g05.poo.p3.g05.Controlador.GestorProveedor;
 import poop3g05.poo.p3.g05.Modelo.Proveedor;
-import poop3g05.poo.p3.g05.Modelo.Usuario;
+import poop3g05.poo.p3.g05.Modelo.Persona;
 
 /**
+ * Esta clase se encarga de mostrar y recibir datos referentes a la clase
+ * Proveedor para las operaciones correspondientes enviando las entradas a los
+ * controladores.
  *
  * @author Enmanuel
  */
 public class AdministrarProveedor {
 
+    /**
+     * Objeto scanner que se va a usar para recibir las entradas del usuario en
+     * toda la clase.
+     */
     private static final Scanner scanner = new Scanner(System.in);
 
+    /**
+     * Este metodo se encarga de visibilizar por consola la informacion de todos
+     * los proveedores disponibles para el taller.
+     *
+     * @param gestorProveedor
+     */
     static void listarProveedores(GestorProveedor gestorProveedor) {
         System.out.println("\n--- LISTA DE PROVEEDORES ---\n");
-        for (Usuario usuario : gestorProveedor.getUsuarios()) {
+        for (Persona usuario : gestorProveedor.getPersonas()) {
             if (usuario instanceof Proveedor proveedor) {
                 System.out.println(proveedor);
             }
@@ -27,6 +40,11 @@ public class AdministrarProveedor {
         System.out.println("");
     }
 
+    /**
+     * Este metodo se encarga de mostrar por consola el submenu desde el cual se
+     * agregaran proveedores y se editaran los existentes.
+¡     * @param gestorProveedor
+     */
     static void subMenuProveedor(GestorProveedor gestorProveedor) {
         boolean continuar = true;
         String opcion;
@@ -59,32 +77,46 @@ public class AdministrarProveedor {
         }
     }
 
+    /**
+     * Este metodo es el encargado de la interaccion por consola con el usuario
+     * para recibir los datos con los que se va a registrar el proveedor y
+     * mostrar la confirmacion.
+     *
+     * @param gestorProveedor
+     */
     private static void registrarProveedor(GestorProveedor gestorProveedor) {
         System.out.println("\n--- REGISTRAR PROVEEDOR ---");
         System.out.print("Cedula o RUC: ");
         String identificacion = scanner.nextLine();
-        if (gestorProveedor.buscarUsuario(identificacion) == null) {
+        if (gestorProveedor.buscarPersona(identificacion) == null) {
             System.out.print("Nombre: ");
             String nombre = scanner.nextLine();
             System.out.print("Descripcion: ");
             String descripcion = scanner.nextLine();
             System.out.print("Numero de contacto: ");
             String telefono = scanner.nextLine();
-            gestorProveedor.agregarUsuario(new Proveedor(identificacion, telefono, nombre, descripcion));
+            gestorProveedor.agregarPersona(new Proveedor(identificacion, telefono, nombre, descripcion));
             System.out.println("Proveedor registrado exitosamente!");
         } else {
             System.out.println("Proveedor ya existe.");
         }
     }
 
+    /**
+     * Este metodo es el encargado de la interaccion por consola con el usuario
+     * para recibir los datos con los que se va editar el proveedor y mostrar la
+     * confirmacion.
+     *
+     * @param gestorProveedor
+     */
     private static void editarProveedor(GestorProveedor gestorProveedor) {
         System.out.println("\n--- EDITAR PROVEEDOR ---");
         System.out.print("Cedula o RUC: ");
         String identificacion = scanner.nextLine();
-        if (gestorProveedor.buscarUsuario(identificacion) != null) {
+        if (gestorProveedor.buscarPersona(identificacion) instanceof Proveedor proveedor) {
             boolean continuar = true;
             while (continuar) {
-                System.out.println(gestorProveedor.buscarUsuario(identificacion));
+                System.out.println(proveedor);
                 String[] opciones = {
                     "Nombre",
                     "Teléfono",

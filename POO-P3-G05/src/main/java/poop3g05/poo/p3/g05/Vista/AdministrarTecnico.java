@@ -7,19 +7,32 @@ package poop3g05.poo.p3.g05.Vista;
 import java.util.Scanner;
 import poop3g05.poo.p3.g05.Controlador.GestorTecnico;
 import poop3g05.poo.p3.g05.Modelo.Tecnico;
-import poop3g05.poo.p3.g05.Modelo.Usuario;
+import poop3g05.poo.p3.g05.Modelo.Persona;
 
 /**
+ * Esta clase se encarga de mostrar y recibir datos referentes a la clase
+ * tecnico para las operaciones correspondientes enviando las entradas a los
+ * controladores.
  *
  * @author Enmanuel
  */
 public class AdministrarTecnico {
 
+    /**
+     * Objeto scanner que se va a usar para recibir las entradas del usuario en
+     * toda la clase.
+     */
     private static final Scanner scanner = new Scanner(System.in);
 
+    /**
+     * Este metodo se encarga de visibilizar por consola la informacion de todos
+     * los tecnicos disponibles en el taller.
+     *
+     * @param gestorTecnico
+     */
     static void listarTecnicos(GestorTecnico gestorTecnico) {
         System.out.println("\n--- LISTA DE TECNICOS ---\n");
-        for (Usuario usuario : gestorTecnico.getUsuarios()) {
+        for (Persona usuario : gestorTecnico.getPersonas()) {
             if (usuario instanceof Tecnico tecnico) {
                 System.out.println(tecnico);
             }
@@ -27,6 +40,12 @@ public class AdministrarTecnico {
         System.out.println("");
     }
 
+    /**
+     * Este metodo se encarga de mostrar por consola el submenu desde el cual se
+     * agregaran y eliminar tecnicos y se editaran los existentes.
+     *
+     * @param gestorTecnico
+     */
     static void subMenuTecnicos(GestorTecnico gestorTecnico) {
         boolean continuar = true;
         String opcion;
@@ -63,11 +82,17 @@ public class AdministrarTecnico {
         }
     }
 
+    /**
+     * Este metodo es el encargado de recibir la informacion para eliminar un
+     * tecnico y mostrar la verificacion.
+     *
+     * @param gestorTecnico
+     */
     private static void eliminarTecnico(GestorTecnico gestorTecnico) {
         System.out.println("\n--- ELIMINAR TECNICO ---");
         System.out.print("Cedula o RUC: ");
         String identificacion = scanner.nextLine();
-        if (gestorTecnico.buscarUsuario(identificacion) != null) {
+        if (gestorTecnico.buscarPersona(identificacion) != null) {
             gestorTecnico.eliminarTecnico(identificacion);
             System.out.println("Tecnico eliminado exitosamente!");
         } else {
@@ -75,30 +100,44 @@ public class AdministrarTecnico {
         }
     }
 
+    /**
+     * Este metodo es el encargado de la interaccion por consola con el usuario
+     * para recibir los datos con los que se va a registrar el tecnico y mostrar
+     * la confirmacion.
+     *
+     * @param gestorTecnico
+     */
     private static void registrarTecnico(GestorTecnico gestorTecnico) {
         System.out.println("\n--- REGISTRAR TECNICO ---");
         System.out.print("Cedula o RUC: ");
         String identificacion = scanner.nextLine();
-        if (gestorTecnico.buscarUsuario(identificacion) == null) {
+        if (gestorTecnico.buscarPersona(identificacion) == null) {
             System.out.print("Nombre: ");
             String nombre = scanner.nextLine();
             System.out.print("Especialidad: ");
             String especialidad = scanner.nextLine();
             System.out.print("Numero de telefono: ");
             String telefono = scanner.nextLine();
-            gestorTecnico.agregarUsuario(new Tecnico(identificacion, telefono, nombre, especialidad));
+            gestorTecnico.agregarPersona(new Tecnico(identificacion, telefono, nombre, especialidad));
             System.out.println("Tecnico registrado exitosamente!");
         } else {
             System.out.println("Tecnico ya existe.");
         }
     }
 
+    /**
+     * Este metodo es el encargado de la interaccion por consola con el usuario
+     * para recibir los datos con los que se va a editar el tecnico y mostrar la
+     * confirmacion.
+     *
+     * @param gestorTecnico
+     */
     private static void editarTecnico(GestorTecnico gestorTecnico) {
         System.out.println("\n--- EDITAR TECNICO ---");
         System.out.print("Cedula o RUC: ");
         String identificacion = scanner.nextLine();
-        if (gestorTecnico.buscarUsuario(identificacion) != null) {
-            System.out.println(gestorTecnico.buscarUsuario(identificacion));
+        if (gestorTecnico.buscarPersona(identificacion) != null) {
+            System.out.println(gestorTecnico.buscarPersona(identificacion));
             boolean continuar = true;
             while (continuar) {
                 String[] opciones = {
@@ -142,6 +181,21 @@ public class AdministrarTecnico {
         } else {
             System.out.println("Tecnico no existe.");
         }
+    }
 
+    /**
+     * Este metodo es el encargado de mostrar por consola el total que se ha
+     * recaudado por cada Tecnico.
+     *
+     * @param gestorTecnico
+     */
+    static void obtenerGananciaTecnicos(GestorTecnico gestorTecnico) {
+        System.out.printf("%-15s %50s%n", "Tecnico", "Total");
+        System.out.printf("%-15s %50s%n", ("-").repeat(10), ("-").repeat(5));
+        for (Persona t : gestorTecnico.getPersonas()) {
+            System.out.printf("%-15s %50s%n",
+                    gestorTecnico.buscarPersona(t.getId()).getUsername(),
+                    gestorTecnico.buscarPersona(t.getId()).getGanancia());
+        }
     }
 }

@@ -4,18 +4,33 @@
  */
 package poop3g05.poo.p3.g05.Vista;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import poop3g05.poo.p3.g05.Controlador.GestorServicio;
 import poop3g05.poo.p3.g05.Modelo.Servicio;
 
 /**
+ * Esta clase se encarga de imprimir por pantalla y de recibir los datos para
+ * enviarlos al controlador sobre la mayoria de lo relacionado con la clase
+ * Servicio
  *
  * @author Enmanuel
  */
 public class AdministrarServicio {
 
+    /**
+     * Objeto scanner que se va a usar para recibir las entradas del usuario en
+     * toda la clase.
+     */
     private static final Scanner scanner = new Scanner(System.in);
 
+    /**
+     * Este metodo se encarga de visibilizar por consola la informacion de todos
+     * los servicios disponibles en el taller.
+     *
+     * @param gestorServicio
+     */
     static void listarServicios(GestorServicio gestorServicio) {
         System.out.println("\n--- LISTA DE SERVICIOS ---\n");
         for (Servicio servicio : gestorServicio.getServicios()) {
@@ -24,6 +39,12 @@ public class AdministrarServicio {
         System.out.println("");
     }
 
+    /**
+     * Este metodo se encarga de mostrar por consola el submenu desde el cual se
+     * agregaran servicios y se editaran los existentes
+     *
+     * @param gestorServicio
+     */
     static void subMenuServicio(GestorServicio gestorServicio) {
         boolean continuar = true;
         String opcion;
@@ -56,20 +77,36 @@ public class AdministrarServicio {
         }
     }
 
+    /**
+     * Este metodo es el encargado de la interaccion por consola con el usuario
+     * para recibir los datos con los que se va a registrar el Servicio y
+     * mostrar la confirmacion.
+     *
+     * @param gestorServicio
+     */
     private static void registrarServicio(GestorServicio gestorServicio) {
         System.out.println("\n--- REGISTRAR SERVICIO ---");
         System.out.print("Nombre del servicio: ");
         String nombre = scanner.nextLine();
+        System.out.print("Fecha de registro del servicio(dd-MM-yyyy): ");
+        LocalDate fecha = LocalDate.parse(scanner.nextLine(), DateTimeFormatter.ofPattern("dd-MM-yyyy"));
         System.out.print("Precio del servicio: ");
         double precio = Double.parseDouble(scanner.nextLine());
-        gestorServicio.agregarServicio(new Servicio(nombre, precio));
+        gestorServicio.agregarServicio(new Servicio(nombre, precio, fecha));
         System.out.println("Servicio registrado exitosamente!");
     }
 
+    /**
+     * Este metodo es el encargado de la interaccion por consola con el usuario
+     * para recibir los datos con los que se va a editar el servicio y mostrar
+     * la confirmacion.
+     *
+     * @param gestorServicio
+     */
     private static void editarServicio(GestorServicio gestorServicio) {
         System.out.println("\n--- EDITAR SERVICIO ---");
         System.out.print("Codigo del servicio: ");
-        int id = Integer.parseInt(scanner.nextLine());  //"1"=1
+        int id = Integer.parseInt(scanner.nextLine());
 
         if (gestorServicio.buscarServicio(id) != null) {
             boolean continuar = true;
@@ -89,7 +126,9 @@ public class AdministrarServicio {
                     case "1" -> {
                         System.out.print("Nuevo precio: ");
                         double nuevoPrecio = Double.parseDouble(scanner.nextLine());
-                        gestorServicio.editarPrecioServicio(id, nuevoPrecio);
+                        System.out.print("Fecha de edicion del servicio(dd-MM-yyyy): ");
+                        LocalDate fecha = LocalDate.parse(scanner.nextLine(), DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+                        gestorServicio.editarPrecioServicio(id, nuevoPrecio, fecha);
                     }
                     case "0" -> {
                         continuar = false;
@@ -104,5 +143,26 @@ public class AdministrarServicio {
             System.out.println("Servicio no existe.");
         }
     }
-    
+
+    /**
+     * Este metodo imprime por consola las ganancincias recaudadas por cada tipo
+     * de servicio. No esta incluido el valor de las memembrecias de las
+     * empresas.
+     *
+     * @param gestorServicio
+     */
+    public static void obtenerRecaudoServicios(GestorServicio gestorServicio) {
+        System.out.printf("%-50s %15s%n", "Servicio", "Total");
+        System.out.printf("%-15s %40s%n", ("-").repeat(25), ("-").repeat(5));
+
+        for (Servicio s : gestorServicio.getServicios()) {
+            Servicio servicio = gestorServicio.buscarServicio(s.getCodigo());
+
+            String nombre = servicio.getNombre();
+            double recaudo = servicio.getRecaudo();
+
+            System.out.printf("%-50s %,15.2f%n", nombre, recaudo);
+        }
+    }
+
 }

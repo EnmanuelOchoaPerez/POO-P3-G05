@@ -4,109 +4,87 @@
  */
 package poop3g05.poo.p3.g05.Controlador;
 
+import java.time.YearMonth;
+import java.util.ArrayList;
+import poop3g05.poo.p3.g05.Modelo.Cliente;
+import poop3g05.poo.p3.g05.Modelo.Orden;
 /**
- *
+ * Controlador encargado de gestionar las órdenes de servicio registradas
+ * en el sistema. Permite agregar órdenes, filtrarlas por periodo y empresa,
+ * verificar si un cliente tiene órdenes, y calcular ingresos.
+ * 
+ * Esta clase está destinada a instanciarse una única vez en el método
+ * {@code inicializarApp} de la clase {@code SistemaPrincipal}.
+ * 
  * @author Rafael Cosmo
  */
-
-import poop3g05.poo.p3.g05.Modelo.*;
-import poop3g05.poo.p3.g05.Vista.*;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
 public class GestorOrden {
-    private final List<Orden> ordenes;
 
+    /**
+     * Lista que almacena todas las órdenes de servicio registradas en el sistema.
+     */
+    private final ArrayList<Orden> ordenes;
+
+    /**
+     * Constructor por defecto que inicializa la lista de órdenes. Esta clase
+     * está destinada a instanciarse una única vez en el método
+     * {@code inicializarApp} de la clase {@code SistemaPrincipal}.
+     */
     public GestorOrden() {
         this.ordenes = new ArrayList<>();
     }
 
+    /**
+     * Agrega una nueva orden de servicio al registro del sistema.
+     *
+     * @param orden instancia de Orden a registrar
+     */
     public void agregarOrden(Orden orden) {
         ordenes.add(orden);
     }
-    
-   
 
-//    public Orden buscarOrden(String id) {
-//        for (Orden orden : ordenes) {
-//            if (orden.getId() == id) {
-//                return orden;
-//            }
-//        }
-//        return null;
-//    }
+    /**
+     * Filtra y retorna las órdenes que coincidan con el periodo (mes y año)
+     * y el ID de la empresa dada.
+     *
+     * @param periodo periodo de la orden (YearMonth)
+     * @param idEmpresa ID de la empresa cliente
+     * @return lista de órdenes que coincidan con los criterios
+     */
+    public ArrayList<Orden> flitrarOrdenes(YearMonth periodo, String idEmpresa) {
+        ArrayList<Orden> ordenesFiltradas = new ArrayList<>();
 
-//        private static void generarFactura(
-//            GestorFactura gestorFacturas,
-//            GestorCliente gestorClientes,
-//            GestorOrden gestorOrdenes) {
-//
-//        System.out.println("\n--- GENERAR FACTURA ---");
-//
-//        // Seleccionar cliente
-//        System.out.println("Clientes disponibles:");
-//        AdministrarCliente.listarClientes(gestorClientes);
-//        System.out.print("Seleccione ID cliente: ");
-//        String idCliente = scanner.nextLine();
-//        Cliente cliente = (Cliente) gestorClientes.buscarUsuario(idCliente);
-//
-//        if (cliente == null) {
-//            System.out.println("Cliente no encontrado!");
-//            return;
-//        }
-//
-//        // Buscar órdenes del cliente
-//        ArrayList<Orden> ordenesCliente = new ArrayList<>();
-//        for (Orden orden : gestorOrdenes.getOrdenes()) {
-//            if (!orden.getIdCliente().equals(idCliente)) {
-//            } else {
-//                ordenesCliente.add(orden);
-//            }
-//        }
-//
-//        if (ordenesCliente.isEmpty()) {
-//            System.out.println("El cliente no tiene órdenes pendientes");
-//            return;
-//        }
-//
-//        System.out.println("\nÓrdenes pendientes:");
-//        for (Orden orden : ordenesCliente) {
-//            System.out.println("ID: " + orden.getId() + " - Fecha: " + orden.getFechaServicio());
-//        }
-//
-//        System.out.print("Seleccione ID orden: ");
-//        String idOrden = scanner.nextLine();
-//
-//        Orden ordenSeleccionada = null;
-//        for (Orden orden : ordenesCliente) {
-//            if (orden.getId() == idOrden) {
-//                ordenSeleccionada = orden;
-//                break;
-//            }
-//        }
-//
-//        if (ordenSeleccionada == null) {
-//            System.out.println("Orden no encontrada!");
-//            return;
-//        }
-//
-//        // Generar factura
-//        Factura factura = gestorFacturas.generarFactura(cliente, ordenSeleccionada.getServicios());
-//        System.out.println("\n--- FACTURA GENERADA ---");
-//        System.out.println("Número: " + factura.getId());
-//        System.out.println("Fecha: " + factura.getFecha());
-//        System.out.println("Cliente: " + factura.getCliente().getUsername());
-//        System.out.println("\nDetalles:");
-//        for (DetalleServicio detalle : factura.getDetalles()) {
-//            System.out.println(detalle.getServicio().getNombre()
-//                    + " x " + detalle.getCantidad()
-//                    + " = $" + detalle.calcularSubtotal());
-//        }
-//        System.out.println("\nTOTAL: $" + factura.getTotal());
-//    }
-//    
-    public List<Orden> getOrdenes() {
+        for (Orden o : ordenes) {
+            if (YearMonth.from(o.getFechaServicio()).equals(periodo)
+                    && o.getCliente().getId().equals(idEmpresa)) {
+                ordenesFiltradas.add(o);
+            }
+        }
+        return ordenesFiltradas;
+    }
+
+    /**
+     * Retorna una copia de la lista de órdenes registradas.
+     *
+     * @return lista de órdenes actuales
+     */
+    public ArrayList<Orden> getOrdenes() {
         return new ArrayList<>(ordenes);
     }
+
+    /**
+     * Verifica si un cliente específico tiene al menos una orden registrada.
+     *
+     * @param cliente cliente a verificar
+     * @return true si tiene al menos una orden, false en caso contrario
+     */
+    public boolean tieneOrden(Cliente cliente) {
+        for (Orden orden : ordenes) {
+            if (orden.getCliente().equals(cliente)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
